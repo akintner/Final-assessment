@@ -5,7 +5,7 @@ class LinksController < ApplicationController
 
   def index
     if current_user 
-      user = User.find(current_user.id)
+      @user = User.find(current_user.id)
       @links = Link.all
     else
       flash_message_please_login
@@ -28,9 +28,25 @@ class LinksController < ApplicationController
   end
 
   def edit
+    if current_user == @user
+      @link = Link.find(params[:id])
+    else
+      redirect_to :status => 404
+    end
   end
 
   def update
+    @link = Link.find(params[:id])
+
+    if @link.update_attributes(link_params)
+      @link.save
+      flash.now[:success] = "Link successfully edited"
+      redirect_to root_path
+    else
+      flash.now[:danger] = "Error in update, please try again. URL must be valid and title must be present."
+      @errors = @link.errors
+      render :edit
+    end
   end
 
   private
