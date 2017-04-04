@@ -45,6 +45,14 @@ describe "Guest login workflow" do
 
     scenario "can log in" do
       visit login_path
+      click_button("Sign Up")
+
+      fill_in "user[email]", with: "profsnape@hogwarts.edu"
+      fill_in "user[password]", with: 'password01'
+      fill_in "user[password_confirmation]", with: 'password01'
+      click_button("Sign Up")
+
+      visit login_path
 
       fill_in "email", with: "profsnape@hogwarts.edu"
       fill_in "password", with: 'password01'
@@ -52,7 +60,7 @@ describe "Guest login workflow" do
       click_button("Log In")
 
       expect(current_path).to eql(root_path)
-      expect(page).to have_content("Successfully logged in")
+      expect(page).to have_content("Logout")
     end
 
     scenario "cannot log in if they enter invalid credentials" do
