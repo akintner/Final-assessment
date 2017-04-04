@@ -14,7 +14,7 @@
     <%= form_for(Link.new) do |f| %>
       <h2>Welcome to URLLockbox</h2>
       Title: <%= f.text_field :title %>
-      URL: <%= f.text_field :url %>
+      URL: <%= f.url_field :url %>
       <%= f.submit "Submit Link" %>
       <% end %>
     <br>
