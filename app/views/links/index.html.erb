@@ -1,0 +1,20 @@
+<section class="new-link">
+    <%= form_for(Link.new) do |f| %>
+      <h2>Welcome to URLLockbox</h2>
+      <%= f.text_field :title %>
+      <%= f.text_field :url %>
+      <%= f.submit "Submit Link", {class: "btn-continue"} %>
+      <% end %>
+    <br>
+</section>
+
+<section class="links">
+  <h4>Here are your current links:</h4>
+  <% @links.each do |link| %>
+    <div id="individual-link">
+      <%= link.title %>
+      <%= link.url %>
+      <%= link.read %>
+    </div>
+  <% end %>
+</section> 

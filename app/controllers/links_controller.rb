@@ -9,6 +9,7 @@ class LinksController < ApplicationController
       @links = Link.all
     else
       flash_message_please_login
+      redirect_to login_path
     end
   end
 

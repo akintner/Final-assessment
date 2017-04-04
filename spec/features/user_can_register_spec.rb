@@ -6,23 +6,26 @@ describe "Guest login workflow" do
       visit login_path
 
       expect(current_path).to eq('/login')
-      expect(page).to have_button("Sign Up or Log In")
+      expect(page).to have_button("Sign Up")
+      expect(page).to have_button("Log In")
     end
 
    scenario "can create a new registration for the app" do
       visit login_path
+      click_button("Sign Up")
+      expect(current_path).to eq(new_user_path)
 
       fill_in "user[email]", with: "profsnape@hogwarts.edu"
       fill_in "user[password]", with: 'password01'
       fill_in "user[password_confirmation]", with: 'password01'
-      click_button("Sign Up or Log In")
+      click_button("Sign Up")
 
       expect(current_path).to eq(root_path)
     end
 
     scenario "cannot create a new registration for the app with blank credentials" do
       visit login_path
-      click_on "Sign Up or Log In"
+      click_on "Log In"
 
       expect(page).to have_content("Email and password combination does not exist")
     end
@@ -33,7 +36,7 @@ describe "Guest login workflow" do
       fill_in "user[email]", with: "headmasterdumbledore@wizard.com"
       fill_in "user[password]", with: 'password01'
       fill_in "user[password_confirmation]", with: 'imawizard'
-      click_button("Sign Up or Log In")
+      click_button("Log In")
 
       expect(page).to have_content("Password and password confirmation do not match. Please try again.")
     end
