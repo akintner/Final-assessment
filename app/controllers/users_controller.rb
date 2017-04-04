@@ -6,13 +6,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @registered_user = User.create(user_params)
+    @user = User.create(user_params)
 
-    if @registered_user.save
-      session[:user_id] = @registered_user.id
+    if @user.save
+      session[:user_id] = @user.id
       flash_message_successful_account_creation
       redirect_to root_path
     else
+      @user.destroy
       flash_message_failed_registration
       render :new
     end
