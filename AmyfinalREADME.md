@@ -1,4 +1,4 @@
-== README
+== Amy's Final Exam README
 
 
 * Rails version: 5.0.1
