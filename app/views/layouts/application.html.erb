@@ -7,9 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-  <%= yield %>
-</div>
-
+  <% if page_is_login_or_create? %>
+      <%= render partial: 'layouts/backdrop' %>
+  <% end %>
+  <div class="container">
+    <main>
+      <%= render partial: 'shared/errors' %>
+      <%= render partial: 'shared/messages' %>
+      <%= yield %>
+    </main>
+  </div>
 </body>
 </html>
