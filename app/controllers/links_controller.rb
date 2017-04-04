@@ -6,7 +6,7 @@ class LinksController < ApplicationController
   def index
     if current_user 
       @user = User.find(current_user.id)
-      @links = Link.all
+      @links = @user.links
     else
       flash_message_please_login
       redirect_to login_path
@@ -17,11 +17,13 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.create(link_params)
+    @user = User.find(current_user.id)
+    @link = @user.links.create(link_params)
     if @link.valid_url?(params[:url])
       @link.save
       flash[:success] = "Link created"
       redirect_to root_path
+      @links = Link.all
     else
       flash[:error] = "Invalid Link URL, please being the link path with http://www."
       render :index
