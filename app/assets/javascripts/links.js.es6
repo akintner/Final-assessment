@@ -1,5 +1,6 @@
 $( document ).ready(function(){
-  $("body").on("click", ".mark-as-read", markAsRead)
+  $("body").on("click", ".mark-as-read", markAsRead);
+  filterLinks();
 })
 
 function markAsRead(e) {
@@ -22,4 +23,20 @@ function updateLinkStatus(link) {
 
 function displayFailure(failureData){
   console.log("FAILED attempt to update Link: " + failureData.responseText);
+}
+
+function filterLinks(){
+  $('#filter-links').keyup(function(){
+    var rows = $('.links').find('#individual-link').hide();
+      if (this.value.length) {
+        doBlackMagic(this, rows)
+      } else rows.show()
+  });
+}
+
+function doBlackMagic(self, rows){
+  var data = self.value.toLowerCase().split(" ");
+  $.each(data, function(i, v) {
+    rows.filter(":contains('" + v + "')").show();
+  });
 }

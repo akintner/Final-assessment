@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<head>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.js"
+    integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+    crossorigin="anonymous"></script>
+  <script src="./assets/javascripts/links.js.es6"></script>
+  <script src="./assets/javascripts/application.js"></script>
+  <link type="text/css" rel="stylesheet" href="../assets/stylesheets/links.css" >
+  <link type="text/css" rel="stylesheet" href="../assets/stylesheets/application.css" >
+</head>
+
 <section class="new-link">
     <%= form_for(Link.new) do |f| %>
       <h2>Welcome to URLLockbox</h2>
@@ -7,7 +19,11 @@
       <% end %>
     <br>
 </section>
-
+<section id="link-filter">
+  <label>Filter by letters in the URL or title:
+    <input type="text" id="filter-links">
+  </label>
+</section>
 <section class="links">
   <h4>Here are your current links:</h4>
   <% @links.each do |link| %>
@@ -15,6 +31,7 @@
       <%= link.title %>
       <%= link.url %>
       <%= link.read %>
+      <%= link_to "Edit", edit_link_path %>
     </div>
   <% end %>
 </section> 
