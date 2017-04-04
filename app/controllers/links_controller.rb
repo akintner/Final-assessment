@@ -19,8 +19,7 @@ class LinksController < ApplicationController
   def create
     @user = User.find(current_user.id)
     @link = @user.links.create(link_params)
-    if @link.valid_url?(params[:url])
-      @link.save
+    if @link.save
       flash[:success] = "Link created"
       redirect_to root_path
       @links = Link.all
@@ -31,7 +30,7 @@ class LinksController < ApplicationController
   end
 
   def edit
-    if current_user == @user
+    if current_user 
       @link = Link.find(params[:id])
     else
       redirect_to :status => 404

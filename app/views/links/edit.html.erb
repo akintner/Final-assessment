@@ -1,8 +1,8 @@
 <h2>Please Edit This Link<h2>
 <section class="new-link">
-    <%= form_for [current_user, @link] do |f| %>
+    <%= form_for @link do |f| %>
       Title: <%= f.text_field :title %>
-      URL: <%= f.text_field :url %>
+      URL: <%= f.url_field :url %>
       <%= f.submit "Edit Link" %>
     <% end %>
 </section>
