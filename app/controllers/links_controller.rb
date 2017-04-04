@@ -21,6 +21,7 @@ class LinksController < ApplicationController
     if @link.valid_url?(params[:url])
       @link.save
       flash[:success] = "Link created"
+      redirect_to root_path
     else
       flash[:error] = "Invalid Link URL, please being the link path with http://www."
       render :index
@@ -51,7 +52,7 @@ class LinksController < ApplicationController
 
   private
     def link_params
-      params.require(:link).permit(:title, :url)
+      params.require(:link).permit(:id, :title, :url)
     end
 
 end
