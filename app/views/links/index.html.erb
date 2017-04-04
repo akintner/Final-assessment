@@ -15,13 +15,15 @@
       <h2>Welcome to URLLockbox</h2>
       Title: <%= f.text_field :title %>
       URL: <%= f.url_field :url %>
-      <%= f.submit "Submit Link" %>
+      <%= f.submit "Submit Link", {class: "btn-continue"} %>
       <% end %>
     <br>
 </section>
 <section id="link-filter">
   <label>Filter by letters in the URL or title:
     <input type="text" id="filter-links">
+    <button class="btn-cancel">Show Read</button>
+    <button class="btn-cancel">Show Unread</button>
   </label>
 </section>
 <section class="links">
@@ -31,9 +33,9 @@
       <%= link.title %>
       <%= link.url %>
       <%= link.read %>
-      <%= link_to "Edit", edit_link_path(link.id), class: "btn-edit" %>
+      <%= button_to "Edit", edit_link_path(link.id), class: "btn-edit" %>
     </div>
   <% end %>
 </section> 
 
-<%= link_to "Logout", logout_path, :method => :delete %>
+<%= button_to "Logout", logout_path, :method => :delete %>

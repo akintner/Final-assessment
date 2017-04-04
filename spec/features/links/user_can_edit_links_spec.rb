@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Editing Links" do
   context "A registered user" do
-   scenario "can create a link" do
+   scenario "can edit a link" do
       visit login_path
       click_button("Sign Up")
 
