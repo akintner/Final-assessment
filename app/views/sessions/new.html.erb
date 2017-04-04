@@ -1,0 +1,17 @@
+<section class="login">
+  <section class="login-form">
+    <%= form_tag(url: login_path) do %>
+      <h2>Welcome to URLLockbox</h2>
+    
+      <section class="register">
+        <%= text_field_tag :email %>
+        <%= password_field_tag :password %>
+        <%= password_field_tag :password_confirmation %>
+      </section><!-- end register -->
+      <%= submit_tag "Log In", {class: "btn-continue"} %>
+      <% end %>
+    <br>
+    <h4 class="OR">OR<h4>
+    <%= button_to 'Sign Up', new_user_path %>
+  </section><!-- end login-form -->
+</section><!-- end login -->

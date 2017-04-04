@@ -1,0 +1,15 @@
+<section class="login">
+  <section class="login-form">
+    <%= form_for(User.new, :url => {:controller => 'users', :action => 'create'} ) do |f| %>
+      <h2>Welcome to URLLockbox</h2>
+    
+      <section class="register">
+        <%= f.text_field :email, placeholder: "email@example.com" %>
+        <%= f.password_field :password, placeholder: "Password" %>
+        <%= f.password_field :password_confirmation, placeholder: "Retype password" %>
+      </section><!-- end register -->
+      <%= f.submit "Sign Up", {class: "btn-continue"} %>
+      <% end %>
+    <br>
+  </section><!-- end login-form -->
+</section><!-- end login -->
