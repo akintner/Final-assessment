@@ -1,9 +1,9 @@
 <section class="new-link">
     <%= form_for(Link.new) do |f| %>
       <h2>Welcome to URLLockbox</h2>
-      <%= f.text_field :title %>
-      <%= f.text_field :url %>
-      <%= f.submit "Submit Link", {class: "btn-continue"} %>
+      Title: <%= f.text_field :title %>
+      URL: <%= f.text_field :url %>
+      <%= f.submit "Submit Link" %>
       <% end %>
     <br>
 </section>
@@ -18,3 +18,5 @@
     </div>
   <% end %>
 </section> 
+
+<%= link_to "Logout", logout_path %>

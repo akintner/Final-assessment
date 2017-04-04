@@ -4,12 +4,12 @@
       <h2>Welcome to URLLockbox</h2>
     
       <section class="register">
-        <%= text_field_tag :email %>
-        <%= password_field_tag :password %>
-        <%= password_field_tag :password_confirmation %>
+        Email: <%= text_field_tag :email %>
+        Password: <%= password_field_tag :password %>
+        Retype Password: <%= password_field_tag :password_confirmation %>
       </section><!-- end register -->
       <%= submit_tag "Log In", {class: "btn-continue"} %>
-      <% end %>
+    <% end %>
     <br>
     <h4 class="OR">OR<h4>
     <%= button_to 'Sign Up', users_new_path, :method => :get %>

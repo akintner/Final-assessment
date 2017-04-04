@@ -13,8 +13,7 @@ class UsersController < ApplicationController
       flash_message_successful_account_creation
       redirect_to root_path
     else
-      @registered_user.destroy
-      @errors = @registered_user.errors
+      flash_message_failed_registration
       render :new
     end
   end

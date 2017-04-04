@@ -17,6 +17,14 @@ class LinksController < ApplicationController
   end
 
   def create
+    @link = Link.create(link_params)
+    if @link.valid_url?(params[:url])
+      @link.save
+      flash[:success] = "Link created"
+    else
+      flash[:error] = "Invalid Link URL, please being the link path with http://www."
+      render :index
+    end
   end
 
   def edit
@@ -24,5 +32,10 @@ class LinksController < ApplicationController
 
   def update
   end
+
+  private
+    def link_params
+      params.require(:link).permit(:title, :url)
+    end
 
 end
