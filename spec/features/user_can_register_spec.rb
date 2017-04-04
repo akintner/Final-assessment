@@ -13,7 +13,7 @@ describe "Guest login workflow" do
    scenario "can create a new registration for the app" do
       visit login_path
       click_button("Sign Up")
-      expect(current_path).to eq(new_user_path)
+      expect(current_path).to eq(users_new_path)
 
       fill_in "user[email]", with: "profsnape@hogwarts.edu"
       fill_in "user[password]", with: 'password01'
@@ -23,7 +23,7 @@ describe "Guest login workflow" do
       expect(current_path).to eq(root_path)
     end
 
-    scenario "cannot create a new registration for the app with blank credentials" do
+    scenario "cannot log in to the app with blank credentials" do
       visit login_path
       click_on "Log In"
 
