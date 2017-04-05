@@ -13,7 +13,7 @@ describe "Logout workflow" do
       click_button("Sign Up")
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Logout")
+      expect(page).to have_button("Logout")
     end
 
     scenario "can logout successfully" do
@@ -27,7 +27,7 @@ describe "Logout workflow" do
       click_button("Sign Up")
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Logout")
+      expect(page).to have_button("Logout")
 
       click_on("Logout")
       expect(current_path).to eq(login_path)

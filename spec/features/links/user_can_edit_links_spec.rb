@@ -17,8 +17,8 @@ describe "Editing Links" do
 
       expect(page).to have_content("http://www.pottermore.com")
 
-      click_link("Edit")
-      expect(current_path).to eq(edit_link_path('2'))
+      click_button("Edit")
+      expect(current_path).to eq(edit_link_path('1'))
 
       fill_in "link[title]", with: "Turn to Page 394."
       click_button("Edit Link")

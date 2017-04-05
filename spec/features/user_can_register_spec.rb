@@ -40,7 +40,7 @@ describe "Guest login workflow" do
       fill_in "user[password_confirmation]", with: 'imawizard'
       click_button("Sign Up")
 
-      expect(page).to have_content("Password and password confirmation do not match. Please try again.")
+      expect(page).to have_content("Registration failed, please try again.")
     end
 
     scenario "can log in" do
@@ -60,7 +60,7 @@ describe "Guest login workflow" do
       click_button("Log In")
 
       expect(current_path).to eql(root_path)
-      expect(page).to have_content("Logout")
+      expect(page).to have_button("Logout")
     end
 
     scenario "cannot log in if they enter invalid credentials" do
