@@ -33,7 +33,7 @@
       <%= link.title %>
       <%= link.url %>
       <%= link.read %>
-      <%= button_to "Edit", edit_link_path(link.id), class: "btn-edit" %>
+      <%= button_to "Edit", edit_link_path(link.id), :method => :get %>
     </div>
   <% end %>
 </section> 
