@@ -1,6 +1,14 @@
 class Api::V1::LinksController < ApplicationController
 
-  
+  def index
+    render json: Link.all
+  end
+
+  def create
+    link = JSON.parse(request.body.read)
+    newLink = Link.create(title: link['title'], url: link['url'])
+    render json: newLink
+  end
 
   def update
     @link = Link.find(params[:id])
@@ -12,8 +20,7 @@ class Api::V1::LinksController < ApplicationController
   end
 
   private
-
-  def link_params
-    params.permit(:read)
-  end
+    def link_params
+      params.permit(:read)
+    end
 end
