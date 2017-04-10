@@ -33,8 +33,8 @@ function clearForm(){
 function markAsRead(e) {
   e.preventDefault();
 
-  var $link = $(this).parents('.link');
-  var linkId = $link.children('#link-id')[0].name;
+  var $link = $(this).parents('.link')
+  var linkId = $link.children('#link-id')[0].name
 
   $.ajax({
     type: "PATCH",
@@ -60,7 +60,7 @@ function markAsUnread(link_id) {
   $(unreadLink).on(click, function(e) {
     e.preventDefault();
 
-    var $link = $(this).parents('.link');
+    var $link = $(this).parents('.link')
     var linkId = $link.children('#link-id')[0].name
 
     $.ajax({

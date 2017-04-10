@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Editing Links" do
+describe "Editing Links", js: true do
   context "A registered user" do
    scenario "can edit a link" do
       visit login_path

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "can mark links as read", :js => :true do
-  xscenario "Mark a link as read" do
+  scenario "Mark a link as read" do
     visit login_path
     click_button("Sign Up")
 

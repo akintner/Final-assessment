@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Link Creation" do
+describe "Link Creation", js: true do
   context "A registered user" do
    scenario "can create a link" do
       visit login_path
