@@ -18,7 +18,7 @@ function addNewLink(){
 }
 
 function appendLink(link){
-  $('#all-links').prepend("<div class='link'><li>Title: " + link.title +
+  $('.all-links').prepend("<div class='link'><li>Title: " + link.title +
     "</li><li>URL: <a href=" + link.url + ">" + link.url +"</a></li> <input type='hidden' name=" + 
     link.id +" id='link-id'>" + "<li class='read-status'>Read? " + link.read + 
     "</li><button class='mark-as-read'>Mark as Read</button>" +
@@ -52,6 +52,29 @@ function displayFailure(failureData){
   console.log("FAILED attempt to update Link: " + failureData.responseText);
 }
 
+function markAsUnread(e) {
+  e.preventDefault();
+
+  var $link = $(this).parents('.links');
+  var linkId = $link.data('link-id');
+
+  $.ajax({
+    type: "PATCH",
+    url: "/api/v1/links/" + linkId,
+    data: { read: false },
+  }).then(updateLinkStatus)
+    .fail(displayFailure);
+}
+
+function updateLinkStatus(link) {
+  $(`.links[data-link-id=${link.id}]`).find(".read-status").text(link.unread);
+
+}
+
+function displayFailure(failureData){
+  console.log("FAILED attempt to update Link: " + failureData.responseText);
+}
+
 function filterLinks(){
   $('#filter-links').keyup(function(){
     var rows = $('.links').find('#individual-link').hide();
@@ -70,6 +93,7 @@ function doBlackMagic(self, rows){
 
 $( document ).ready(function(){
   $("body").on("click", ".mark-as-read", markAsRead);
+  $("body").on("click", "mark-asunread", markAsUnread);
   filterLinks();
   addNewLink();
 })

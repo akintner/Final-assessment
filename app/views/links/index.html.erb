@@ -7,7 +7,7 @@
         <div class="validation-error"></div>
         </label>
         <label id="url-field">URL
-          <input type="text" id="link-url" name="link-url" placeholder="What's the URL?">
+          <input type="url" id="link-url" name="link-url" placeholder="What's the URL?">
         <div class="validation-error"></div>
         </label>
         <button class="btn-continue" id="create-link">Submit Link</button>
@@ -20,15 +20,7 @@
     <button class="btn-cancel">Show Unread</button>
   </label>
 </section>
-<section class="links">
+<section class="all-links">
   <h4>Here are your current links:</h4>
-  <% @links.each do |link| %>
-    <div id="individual-link">
-      <h4><%= link.title %></h4>
-      <a href=<%= link.url %>></a>
-      <button><%= link.read %></button>
-      <%= button_to "Edit", edit_link_path(link.id), :method => :get %>
-    </div>
-  <% end %>
 </section> 
 <%= button_to "Logout", logout_path, :method => :delete %>
