@@ -3,6 +3,6 @@
     <%= form_for @link do |f| %>
       Title: <%= f.text_field :title %>
       URL: <%= f.url_field :url %>
-      <%= f.submit "Edit Link" %>
+      <%= f.submit "Edit Link", {class: "btn-edit"} %>
     <% end %>
 </section>

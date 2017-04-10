@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Editing Links", js: true do
+describe "Editing Links" do
   context "A registered user" do
    scenario "can edit a link" do
       visit login_path
@@ -14,8 +14,6 @@ describe "Editing Links", js: true do
       fill_in "link-title", with: "You're a wizard, Harry!"
       fill_in "link-url", with: "http://www.pottermore.com"
       click_button("Submit Link")
-
-      expect(page).to have_content("http://www.pottermore.com")
 
       click_button("Edit")
       expect(current_path).to eq(edit_link_path(2))

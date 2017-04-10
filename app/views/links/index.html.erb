@@ -21,5 +21,18 @@
   </label>
 </section>
 <section class="all-links">
+  <% @links.each do |link| %>
+    <div class="link">
+      <h4><%= link.title %></h4>
+      <p>URL:  <strong><%= link.url %></strong></a>
+      <p>Already Read?  <strong><%= link.read %></strong></p>
+      <% if link.read %>
+        <button class='btn-edit' id='mark-as-read'>Mark as Unread</button>
+      <% elsif !link.read %>
+        <button class='btn-edit' id='mark-as-read'>Mark as Read</button>
+      <% end %>
+      <%= link_to 'Edit', "/links/#{link.id}/edit", {class: "btn-edit"} %>
+    </div>
+  <% end %>
 </section> 
 <%= button_to "Logout", logout_path, :method => :delete %>

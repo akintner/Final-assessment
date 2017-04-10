@@ -6,7 +6,8 @@ class Link < ActiveRecord::Base
   validates :title, presence: true
   validates :url, presence: true
   validates_format_of :url, :with => URI::regexp(%w(http https))
-  validates_uniqueness_of :title
+  validates_uniqueness_of :title, scope: :user_id
+  validates_uniqueness_of :url, scope: :user_id
 
   private
     # def valid_url?

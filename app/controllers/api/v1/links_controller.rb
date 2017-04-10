@@ -5,9 +5,13 @@ class Api::V1::LinksController < ApplicationController
   end
 
   def create
-    link = JSON.parse(request.body.read)
-    newLink = Link.create(title: link['title'], url: link['url'])
-    render json: newLink
+    if current_user
+      @user = User.find(current_user.id)
+      link = JSON.parse(request.body.read)
+      newLink = @user.links.create(title: link['title'], url: link['url'])
+      newLink.save
+      render json: newLink
+    end
   end
 
   def update

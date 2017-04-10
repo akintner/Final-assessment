@@ -57,7 +57,7 @@ function displayFailure(failureData){
 
 function markAsUnread(link_id) {
   var unreadLink = $(`.link input[name=${link_id}]`).siblings('unread');
-  $(unreadLink).on('click', function(e) {
+  $(unreadLink).on('click', function(e){
     e.preventDefault();
 
     var $link = $(this).parents('.link')
