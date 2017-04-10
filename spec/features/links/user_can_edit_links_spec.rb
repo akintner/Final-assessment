@@ -11,8 +11,8 @@ describe "Editing Links" do
       fill_in "user[password_confirmation]", with: 'password01'
       click_button("Sign Up")
 
-      fill_in "link[title]", with: "You're a wizard, Harry!"
-      fill_in "link[url]", with: "http://www.pottermore.com"
+      fill_in "link-title", with: "You're a wizard, Harry!"
+      fill_in "link-url", with: "http://www.pottermore.com"
       click_button("Submit Link")
 
       expect(page).to have_content("http://www.pottermore.com")
@@ -20,7 +20,7 @@ describe "Editing Links" do
       click_button("Edit")
       expect(current_path).to eq(edit_link_path(2))
 
-      fill_in "link[title]", with: "Turn to Page 394."
+      fill_in "link-title", with: "Turn to Page 394."
       click_button("Edit Link")
 
       expect(current_path).to eq(root_path)

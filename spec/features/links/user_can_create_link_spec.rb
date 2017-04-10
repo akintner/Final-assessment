@@ -11,8 +11,8 @@ describe "Link Creation" do
       fill_in "user[password_confirmation]", with: 'password01'
       click_button("Sign Up")
 
-      fill_in "link[title]", with: "You're a wizard, Harry!"
-      fill_in "link[url]", with: "http://www.pottermore.com"
+      fill_in "link-title", with: "You're a wizard, Harry!"
+      fill_in "link-url", with: "http://www.pottermore.com"
       click_button("Submit Link")
 
       expect(page).to have_content("http://www.pottermore.com")
@@ -28,8 +28,8 @@ describe "Link Creation" do
       fill_in "user[password_confirmation]", with: 'boomtown'
       click_button("Sign Up")
 
-      fill_in "link[title]", with: "whoa, super neat"
-      fill_in "link[url]", with: "boom.com"
+      fill_in "link-title", with: "whoa, super neat"
+      fill_in "link-url", with: "boom.com"
 
       expect(page).not_to have_content("whoa, super neat")
       expect(page).not_to have_content("boom.com")

@@ -10,7 +10,7 @@ function addNewLink(){
       data: JSON.stringify(linkData)
     }).done(function(link){
       appendLink(link);
-      clearForms();
+      clearForm();
     }).fail(function(error){
       console.log(error)
     })

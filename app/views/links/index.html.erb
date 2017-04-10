@@ -24,9 +24,9 @@
   <h4>Here are your current links:</h4>
   <% @links.each do |link| %>
     <div id="individual-link">
-      <%= link.title %>
-      <%= link.url %>
-      <%= link.read %>
+      <h4><%= link.title %></h4>
+      <a href=<%= link.url %>></a>
+      <button><%= link.read %></button>
       <%= button_to "Edit", edit_link_path(link.id), :method => :get %>
     </div>
   <% end %>
