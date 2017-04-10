@@ -33,8 +33,8 @@ function clearForm(){
 function markAsRead(e) {
   e.preventDefault();
 
-  var $link = $(this).parents('.links');
-  var linkId = $link.data('link-id');
+  var $link = $(this).parents('.link');
+  var linkId = $link.children('#link-id')[0].name;
 
   $.ajax({
     type: "PATCH",
@@ -45,29 +45,38 @@ function markAsRead(e) {
 }
 
 function updateLinkStatus(link) {
-  $(`.links[data-link-id=${link.id}]`).find(".read-status").text(link.read);
+  $(`.link input[name=${link.id}]`).siblings('.read-status').text(`Read? ${link.read}`)
+  $(`.link input[name=${link.id}]`).parents('.link').addClass('beenRead')
+  $(`.link input[name=${link.id}]`).parents('.link').children('.mark-as-read').text('Mark as undread').addClass('unread')
+  markAsUnread(link.id);
 }
 
 function displayFailure(failureData){
   console.log("FAILED attempt to update Link: " + failureData.responseText);
 }
 
-function markAsUnread(e) {
-  e.preventDefault();
+function markAsUnread(link_id) {
+  var unreadLink = $(`.link input[name=${link_id}]`).siblings('unread');
+  $(unreadLink).on(click, function(e) {
+    e.preventDefault();
 
-  var $link = $(this).parents('.links');
-  var linkId = $link.data('link-id');
+    var $link = $(this).parents('.link');
+    var linkId = $link.children('#link-id')[0].name
 
-  $.ajax({
-    type: "PATCH",
-    url: "/api/v1/links/" + linkId,
-    data: { read: false },
-  }).then(updateLinkStatus)
-    .fail(displayFailure);
+    $.ajax({
+      type: "PATCH",
+      url: "/api/v1/links/" + linkId,
+      data: { read: false },
+    }).then(updateUnreadLinkStatus)
+      .fail(displayFailure);
+    })
+  
 }
 
-function updateLinkStatus(link) {
-  $(`.links[data-link-id=${link.id}]`).find(".read-status").text(link.unread);
+function updateUnreadLinkStatus(link) {
+  $(`.link input[name=${link.id}]`).siblings('.read-status').text(`Read? ${link.read}`)
+  $(`.link input[name=${link.id}]`).parent('.link').removeClass('beenRead')
+  $(`.link input[name=${link.id}]`).siblings('.mark-as-read').text('Mark as Read').removeClass('unread')
 
 }
 
@@ -93,7 +102,6 @@ function doBlackMagic(self, rows){
 
 $( document ).ready(function(){
   $("body").on("click", ".mark-as-read", markAsRead);
-  $("body").on("click", "mark-asunread", markAsUnread);
   filterLinks();
   addNewLink();
 })
