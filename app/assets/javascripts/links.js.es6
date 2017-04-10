@@ -21,7 +21,7 @@ function appendLink(link){
   $('.all-links').prepend("<div class='link'><li>Title: " + link.title +
     "</li><li>URL: <a href=" + link.url + ">" + link.url +"</a></li> <input type='hidden' name=" + 
     link.id +" id='link-id'>" + "<li class='read-status'>Read? " + link.read + 
-    "</li><button class='mark-as-read'>Mark as Read</button>" + "<button class='btn-edit>Edit</button>" +
+    "</li><button class='btn-edit' id='mark-as-read'>Mark as Read</button>" + "<a class='btn-edit' href=" +"/links/" +link.id +"/edit" +">Edit</a>" +
     "</div>")
 }
 
@@ -47,7 +47,7 @@ function markAsRead(e) {
 function updateLinkStatus(link) {
   $(`.link input[name=${link.id}]`).siblings('.read-status').text(`Read? ${link.read}`)
   $(`.link input[name=${link.id}]`).parents('.link').addClass('beenRead')
-  $(`.link input[name=${link.id}]`).parents('.link').children('.mark-as-read').text('Mark as undread').addClass('unread')
+  $(`.link input[name=${link.id}]`).parents('.link').children('#mark-as-read').text('Mark as undread').addClass('unread')
   markAsUnread(link.id);
 }
 
@@ -57,7 +57,7 @@ function displayFailure(failureData){
 
 function markAsUnread(link_id) {
   var unreadLink = $(`.link input[name=${link_id}]`).siblings('unread');
-  $(unreadLink).on(click, function(e) {
+  $(unreadLink).on('click', function(e) {
     e.preventDefault();
 
     var $link = $(this).parents('.link')
@@ -76,7 +76,7 @@ function markAsUnread(link_id) {
 function updateUnreadLinkStatus(link) {
   $(`.link input[name=${link.id}]`).siblings('.read-status').text(`Read? ${link.read}`)
   $(`.link input[name=${link.id}]`).parent('.link').removeClass('beenRead')
-  $(`.link input[name=${link.id}]`).siblings('.mark-as-read').text('Mark as Read').removeClass('unread')
+  $(`.link input[name=${link.id}]`).siblings('#mark-as-read').text('Mark as Read').removeClass('unread')
 
 }
 
@@ -101,7 +101,7 @@ function doBlackMagic(self, rows){
 }
 
 $( document ).ready(function(){
-  $("body").on("click", ".mark-as-read", markAsRead);
+  $("body").on("click", "#mark-as-read", markAsRead);
   filterLinks();
   addNewLink();
 })
