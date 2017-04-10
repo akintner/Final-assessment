@@ -21,7 +21,7 @@ function appendLink(link){
   $('.all-links').prepend("<div class='link'><li>Title: " + link.title +
     "</li><li>URL: <a href=" + link.url + ">" + link.url +"</a></li> <input type='hidden' name=" + 
     link.id +" id='link-id'>" + "<li class='read-status'>Read? " + link.read + 
-    "</li><button class='mark-as-read'>Mark as Read</button>" +
+    "</li><button class='mark-as-read'>Mark as Read</button>" + "<button class='btn-edit>Edit</button>" +
     "</div>")
 }
 
@@ -77,7 +77,7 @@ function displayFailure(failureData){
 
 function filterLinks(){
   $('#filter-links').keyup(function(){
-    var rows = $('.links').find('#individual-link').hide();
+    var rows = $('.all-links').find('div').hide();
       if (this.value.length) {
         doBlackMagic(this, rows)
       } else rows.show()
@@ -85,7 +85,7 @@ function filterLinks(){
 }
 
 function doBlackMagic(self, rows){
-  var data = self.value.toLowerCase().split(" ");
+  var data = self.value.split(" ");
   $.each(data, function(i, v) {
     rows.filter(":contains('" + v + "')").show();
   });

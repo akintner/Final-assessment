@@ -15,7 +15,8 @@ describe "Link Creation" do
       fill_in "link-url", with: "http://www.pottermore.com"
       click_button("Submit Link")
 
-      expect(page).to have_content("http://www.pottermore.com")
+      expect(Link.count).to eq 1
+      expect(page).to have_content("You're a wizard, Harry!")
       expect(current_path).to eq(root_path)
     end
 
@@ -33,6 +34,7 @@ describe "Link Creation" do
 
       expect(page).not_to have_content("whoa, super neat")
       expect(page).not_to have_content("boom.com")
+      expect(Link.count).to eq 0
     end
   end
 end

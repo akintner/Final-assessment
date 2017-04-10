@@ -12,7 +12,7 @@ describe "Root Page/Links#index" do
       click_button("Sign Up")
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Here are your current links:")
+      expect(page).to have_content("Filter by letters in the URL or title")
     end
   end
 end
