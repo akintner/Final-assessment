@@ -7,6 +7,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'shoulda/matchers'
 require 'faker'
+require 'factory_girl_rails'
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(
