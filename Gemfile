@@ -17,6 +17,7 @@ gem 'sprockets-es6'
 gem 'bcrypt', '~> 3.1.7'
 gem 'validate_url'
 gem 'figaro'
+gem 'rack-cors', :require => 'rack/cors'
 
 # gem 'unicorn'
 
