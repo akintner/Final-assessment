@@ -21,6 +21,7 @@ describe "Guest login workflow" do
       click_button("Sign Up")
 
       expect(current_path).to eq(root_path)
+      expect(page).to have_content("Successfully logged in with new account")
     end
 
     scenario "cannot log in to the app with blank credentials" do
@@ -60,6 +61,7 @@ describe "Guest login workflow" do
       click_button("Log In")
 
       expect(current_path).to eql(root_path)
+      expect(page).to have_content("Successfully logged in")
       expect(page).to have_button("Logout")
     end
 
@@ -71,6 +73,7 @@ describe "Guest login workflow" do
       click_button("Log In")
 
       expect(current_path).to eql(login_path)
+      expect(page).to have_content("Name and password combination not found, please try again")
     end
   end
 end
