@@ -70,14 +70,12 @@ function markAsUnread(link_id) {
     }).then(updateUnreadLinkStatus)
       .fail(displayFailure);
     })
-  
 }
 
 function updateUnreadLinkStatus(link) {
   $(`.link input[name=${link.id}]`).siblings('.read-status').text(`Read? ${link.read}`)
   $(`.link input[name=${link.id}]`).parent('.link').removeClass('beenRead')
   $(`.link input[name=${link.id}]`).siblings('#mark-as-read').text('Mark as Read').removeClass('unread')
-
 }
 
 function displayFailure(failureData){

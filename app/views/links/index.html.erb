@@ -26,6 +26,7 @@
       <h4><%= link.title %></h4>
       <p>URL:  <strong><%= link.url %></strong></a>
       <p>Already Read?  <strong><%= link.read %></strong></p>
+      <input type='hidden' name='<%=link.id %>' id='link-id'>
       <% if link.read %>
         <button class='btn-edit' id='mark-as-read'>Mark as Unread</button>
       <% elsif !link.read %>
