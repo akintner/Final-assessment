@@ -1,3 +1,38 @@
+function linksLoad(){
+  $.ajax({
+    url: '/api/v1/links',
+    method: 'GET'
+  }).done(function(links){
+    if(!links.length == 0){
+    links.forEach(function(element){
+      if(element.read === true){
+        formatReadLinks(element)        
+      } else if(element.read === false){
+        formatUnreadLinks(element)
+      }
+    })
+    }
+  }).fail(function(error){
+    console.log(error)
+  })
+}
+
+function formatUnreadLinks(link){
+  $('#all-links').prepend("<div class='link'><li>Title: " + link.title +
+    "</li><li>URL: <a href=" + link.url + ">" + link.url +"</a></li> <input type='hidden' name=" + 
+    link.id +" id='link-id'>" + "<li class='read-status'>Read? " + link.read + 
+    "</li><button cclass='btn-edit' id='mark-as-read'>Mark as Read</button>" + "<a class='btn-edit' href=" +"/links/" +link.id +"/edit" +">Edit</a>" +
+    "</div>")
+}
+
+function formatReadLinks(link){
+  $('#all-links').prepend("<div class='link readLinks'><li>Title: " + link.title +
+    "</li><li>URL: <a href=" + link.url + ">" + link.url +"</a></li> <input type='hidden' name=" + 
+    link.id +" id='link-id'>" + "<li class='read-status'>Read? " + link.read + 
+    "</li><button class='btn-edit' id='mark-as-read unread'>Mark as Unread</button>" + "<a class='btn-edit' href=" +"/links/" +link.id +"/edit" +">Edit</a>" +
+    "</div>")
+}
+
 function addNewLink(){
   $('#create-link').on('click', function(e){
     event.preventDefault;
@@ -46,7 +81,9 @@ function markAsRead(e) {
 
 function updateLinkStatus(link) {
   $(`.link input[name=${link.id}]`).siblings('.read-status').text(`Read? ${link.read}`)
-  $(`.link input[name=${link.id}]`).parents('.link').addClass('beenRead')
+  $(`.link input[name=${link.id}]`).parents('.link').addClass('beenRead').css({
+    'background-color': 'lightgreen',
+  })
   $(`.link input[name=${link.id}]`).parents('.link').children('#mark-as-read').text('Mark as undread').addClass('unread')
   markAsUnread(link.id);
 }
@@ -74,7 +111,9 @@ function markAsUnread(link_id) {
 
 function updateUnreadLinkStatus(link) {
   $(`.link input[name=${link.id}]`).siblings('.read-status').text(`Read? ${link.read}`)
-  $(`.link input[name=${link.id}]`).parent('.link').removeClass('beenRead')
+  $(`.link input[name=${link.id}]`).parent('.link').removeClass('beenRead').css({
+    'background-color': 'white',
+  })
   $(`.link input[name=${link.id}]`).siblings('#mark-as-read').text('Mark as Read').removeClass('unread')
 }
 
@@ -98,8 +137,23 @@ function doBlackMagic(self, rows){
   });
 }
 
+function readButton(){
+  $('#show-read').on('click', function(e){
+    $('div.link.beenRead').toggle('show');
+  });
+}
+
+function unreadButton(){
+  $('#show-unread').on('click', function(e){
+    $('div.link.beenRead').toggle('hide');
+  });
+}
+
 $( document ).ready(function(){
+  linksLoad();
   $("body").on("click", "#mark-as-read", markAsRead);
   filterLinks();
   addNewLink();
+  readButton();
+  unreadButton();
 })
