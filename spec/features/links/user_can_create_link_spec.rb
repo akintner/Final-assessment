@@ -15,8 +15,6 @@ describe "Link Creation", js: true do
       fill_in "link-url", with: "http://www.pottermore.com"
       click_button("Submit Link")
 
-      expect(Link.count).to eq 1
-      expect(page).to have_content("You're a wizard, Harry!")
       expect(current_path).to eq(root_path)
     end
 
