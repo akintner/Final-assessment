@@ -29,7 +29,7 @@ function formatReadLinks(link){
   $('#all-links').prepend("<div class='link readLinks'><li>Title: " + link.title +
     "</li><li>URL: <a href=" + link.url + ">" + link.url +"</a></li> <input type='hidden' name=" + 
     link.id +" id='link-id'>" + "<li class='read-status'>Read? " + link.read + 
-    "</li><button class='btn-edit' id='mark-as-read unread'>Mark as Unread</button>" + "<a class='btn-edit' href=" +"/links/" +link.id +"/edit" +">Edit</a>" +
+    "</li><button class='btn-edit' id='unread'>Mark as Unread</button>" + "<a class='btn-edit' href=" +"/links/" +link.id +"/edit" +">Edit</a>" +
     "</div>")
 }
 
@@ -84,29 +84,24 @@ function updateLinkStatus(link) {
   $(`.link input[name=${link.id}]`).parents('.link').addClass('beenRead').css({
     'background-color': 'lightgreen',
   })
-  $(`.link input[name=${link.id}]`).parents('.link').children('#mark-as-read').text('Mark as undread').addClass('unread')
-  markAsUnread(link.id);
+  $(`.link input[name=${link.id}]`).parents('.link').children('#mark-as-read').text('Mark as undread').addId('unread')
 }
 
 function displayFailure(failureData){
   console.log("FAILED attempt to update Link: " + failureData.responseText);
 }
 
-function markAsUnread(link_id) {
-  var unreadLink = $(`.link input[name=${link_id}]`).siblings('unread');
-  $(unreadLink).on('click', function(e){
-    e.preventDefault();
+function markAsUnread(e) {
+  e.preventDefault();
+  var $link = $(this).parents('.link')
+  var linkId = $link.children('#link-id')[0].name
 
-    var $link = $(this).parents('.link')
-    var linkId = $link.children('#link-id')[0].name
-
-    $.ajax({
-      type: "PATCH",
-      url: "/api/v1/links/" + linkId,
-      data: { read: false },
-    }).then(updateUnreadLinkStatus)
-      .fail(displayFailure);
-    })
+  $.ajax({
+    type: "PATCH",
+    url: "/api/v1/links/" + linkId,
+    data: { read: false },
+  }).then(updateUnreadLinkStatus)
+    .fail(displayFailure);
 }
 
 function updateUnreadLinkStatus(link) {
@@ -114,7 +109,7 @@ function updateUnreadLinkStatus(link) {
   $(`.link input[name=${link.id}]`).parent('.link').removeClass('beenRead').css({
     'background-color': 'white',
   })
-  $(`.link input[name=${link.id}]`).siblings('#mark-as-read').text('Mark as Read').removeClass('unread')
+  $(`.link input[name=${link.id}]`).siblings('#unread').text('Mark as Read').removeId('unread').addId("mark-as-read")
 }
 
 function displayFailure(failureData){
@@ -152,6 +147,7 @@ function unreadButton(){
 $( document ).ready(function(){
   linksLoad();
   $("body").on("click", "#mark-as-read", markAsRead);
+  $("body").on("click", "#unread", markAsUnread)
   filterLinks();
   addNewLink();
   readButton();

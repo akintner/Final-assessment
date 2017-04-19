@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::LinksController do
+RSpec.describe Api::V1::HotLinksController do
   scenario "returns top ten links" do
     @user = User.create(email: "jediluke@starwars.com", password: "amazeballs")
     one = Link.create(title: "super neat", url: "http://www.neato.com", user_id: @user.id)
@@ -16,7 +16,7 @@ RSpec.describe Api::V1::LinksController do
     eleven = Link.create(title: "save the trees", url: "http://www.treesaregreat.com", user_id: @user.id)
     twelve = Link.create(title: "impeach trump", url: "http://www.loser.com", user_id: @user.id)
 
-    get "/api/v1/links/toplinks"
+    get "/api/v1/toplinks"
 
     expect(response).to be_success
     links = JSON.parse(response.body)

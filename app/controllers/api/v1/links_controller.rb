@@ -4,10 +4,6 @@ class Api::V1::LinksController < ApplicationController
     render json: Link.all
   end
 
-  def top_ten
-    render json: Link.where('updated_at > ?', 24.hours.ago).limit(10)
-  end
-
   def create
     if current_user
       @user = User.find(current_user.id)
